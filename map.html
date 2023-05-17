@@ -37,18 +37,25 @@
         }
         #allmap {
             overflow: hidden;
-            width: 62%;
+            width: 100%;
             height: 100%;
             margin: 0;
             border: 1px solid gray;
             float: left;
         }
         #text {
-            margin-top: 10px;
-            overflow: hidden;
-            width: 36%;
-            height: 100%;
-            float: right;
+            background-color: hsla(33, 100%, 88%, 0.5);
+            position: absolute;
+            overflow: auto;
+            right: 5%;
+            top: 12%;
+            width: 30%;
+            height: 85%;
+            z-index: 250;
+            padding: 2%;
+            cursor: default;
+            border-radius: 20px;
+            border: 5px dashed brown;
         }
 		header{
             position: absolute;
@@ -103,7 +110,27 @@
     <div id="text">
         我从<a href="javascript:void(0);" onclick="marker[0].openInfoWindow(infoWindow[0]);map.centerAndZoom(beijingPosition, 10);">北京</a>出发，
         去了<a href="javascript:void(0);" onclick="marker[1].openInfoWindow(infoWindow[1]);map.centerAndZoom(hangzhouPosition, 10);">杭州</a>，
-        然后去了<a href="javascript:void(0);" onclick="marker[2].openInfoWindow(infoWindow[2]);map.centerAndZoom(taiwanPosition, 10);">台湾</a>。
+        然后去了<a href="javascript:void(0);" onclick="marker[2].openInfoWindow(infoWindow[2]);map.centerAndZoom(taiwanPosition, 10);">台湾</a>。<br>
+        
+        <h2 style="text-align: center"><font size="5" color="red" >初战必胜——第一次战役</font> </h2>
+        <br>
+        &nbsp&nbsp&nbsp&nbsp 10月25日，志愿军发起第一次战役。
+        7时许，志愿军第40军第120师第360团在云山以北与北进的南朝鲜军第1师先头部队接触，将其击退。
+        10时许，第40军第118师在温井西北两水洞地区与南朝鲜军第6师第2团第3营和1个炮兵中队预期遭遇，当夜，第118、第120师乘胜前进，占领温井。
+        第40军主力于28日在温井以东龟头洞地区，向南朝鲜军第6、第8师各2个营发起攻击，至29日晨将其大部歼灭。
+        该军第118师进至古场地区，于29日晚将南朝鲜军第6师第7团大部歼灭。与此同时，第39军进至云山地区，对南朝鲜军第1师构成三面包围。
+        第38军进至熙川附近，第66军进至龟城以西地区，志愿军预备队第50军主力渡江，向铁山半岛集结。
+        <br>
+        &nbsp&nbsp&nbsp&nbsp 至10月31日，西线志愿军主力已进至古军营洞、塔洞、泰川以北、云山以北、温井、熙川一线，完成了战役展开，并歼灭南朝鲜军第6师大部和第8师一部。
+        “联合国军”遭打击后，虽已发现志愿军入朝参战，但认为中国是象征性出兵，故以美英军接替南朝鲜军，继续向中朝边境推进。
+        10月31日，英第27旅进至定州、宣川，美军第24师进至泰川、龟城，骑兵第1师北调云山、龙山洞地区接替南朝鲜军第1师继续北进，
+        第2师进至安州地区作为第8集团军预备队，南朝鲜军则收缩防线，屏护美军右翼安全。
+        志愿军领导人采取侧后迂回、结合正面突击的战法，以第38军沿清川江左岸向院里、军隅里攻进，断敌退路，以第40、第39、第66军对当面之敌展开攻击，
+        先打南朝鲜军，而后视情歼灭美英军部队，力争在清川江南北地区各个歼灭敌人。各军按统一部署，于11月1日黄昏发起攻击。第39军向云山发起进攻，至3日夜，
+        歼灭美骑兵第1师第8团大部和南朝鲜军第1师第15团大部，重创美军骑兵第1师。第40军经石仓洞、曲波院攻击前进，逼近宁边；第38军经球场沿清川江左岸攻击前进，
+        占领院里地区，对西线“联合国军”侧后构成威胁；第66军主力进至龟城以西、以北地区，将美军第24师先头团阻于大安洞以南；第50军第150师由安东渡江后进至新义州以南，
+        准备阻击进至南市洞的英军第27旅。美军第8集团军遭到志愿军连续突击，且侧后受到严重威胁，被迫于11月3日开始全线撤退。志愿军转入追击作战。在志愿军连续攻占了龙登里、德川等地后，
+        志愿军的进攻在11月5日结束，7日，第42军奉命撤出黄草岭以南阵地转移至柳潭里一带组织防御。
     </div>
 <!--    <div style="position: absolute;">-->
 <!--        <button id="open" onclick="addClick()">增加地图点击事件</button>-->
@@ -116,7 +143,7 @@
 <script>
 // 百度地图API功能
 var map = new BMap.Map("allmap"); // 创建Map实例
-map.setMapType(BMAP_SATELLITE_MAP);
+//map.setMapType(BMAP_SATELLITE_MAP);
 
 var opts = { 
   enableHighResolution: true, // 启用高清地图显示
@@ -129,30 +156,123 @@ map.addControl(new BMap.OverviewMapControl()); // 添加缩略图控件，显示
 map.addControl(new BMap.MapTypeControl()); // 添加地图类型控件，包括地图、卫星和三维地图切换按钮
 
 
-map.centerAndZoom(new BMap.Point(118.454, 32.955), 6); // 设置地图显示的城市 此项是必须设置的
+map.centerAndZoom(new BMap.Point(127, 40), 9); // 设置地图显示的城市 此项是必须设置的
 map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
-var beijingPosition=new BMap.Point(116.432045,39.910683),
-    hangzhouPosition=new BMap.Point(120.129721,30.314429),
-    taiwanPosition=new BMap.Point(121.491121,25.127053);
-var points = [beijingPosition,hangzhouPosition, taiwanPosition];
+var 
+    xuanchaun=new BMap.Point(124.923367,39.808154),
+    guicheng=new BMap.Point(125.223473,39.957866),
+    guchang=new BMap.Point(125.957065,40.616096),
+    wenjing=new BMap.Point(126.021456,40.356218),
+    dongxin=new BMap.Point(126.146787,40.145645),
+    fuzhanling=new BMap.Point(127.620296,40.489357),
+    xinxing=new BMap.Point(127.620296,40.489357),
+    huangcaoling=new BMap.Point(127.620296,40.489357),
+    anzhou=new BMap.Point(125.656744,39.620162),
+    dandong=new BMap.Point(124.286145,40.024477),
+    manpu=new BMap.Point(126.286851,41.145681),
+    chushan=new BMap.Point(125.81542,40.833759),
+    ruchaodian=new BMap.Point(124.695485,40.318216),
+    jiangjie=new BMap.Point(126.618002,40.97335),
+    yinshan=new BMap.Point(125.826919,40.113704),
+    wushijun=new BMap.Point(124.623367,40.028154)
+    ;
+
+
+var points = [xuanchaun,guicheng,guchang,wenjing,dongxin,fuzhanling,xinxing,huangcaoling,anzhou,dandong,manpu,chushan,ruchaodian,jiangjie,yinshan];
 var myIcon = new BMap.Icon("Icon.png", new BMap.Size(20, 20));
+// 创建旋转的图片对象
+var icon = new BMap.Icon("arrow.png", new BMap.Size(31, 31), {
+  imageSize: new BMap.Size(31, 31),  // 图片的原始大小
+  anchor: new BMap.Size(16, 16)      // 图片的锚点，即旋转中心
+});
 // 创建Marker标注，使用圆形图标
-var marker = [new BMap.Marker(beijingPosition, {icon: myIcon}),
-    new BMap.Marker(hangzhouPosition, {icon: myIcon}),
-    new BMap.Marker(taiwanPosition, {icon: myIcon})];
+
+var marker = [
+    new BMap.Marker(xuanchaun, {icon: myIcon}),
+    new BMap.Marker(guicheng, {icon: myIcon}),
+    new BMap.Marker(guchang, {icon: myIcon}),
+    new BMap.Marker(wenjing, {icon: myIcon}),
+    new BMap.Marker(dongxin, {icon: myIcon}),
+    new BMap.Marker(fuzhanling, {icon: myIcon}),
+    new BMap.Marker(xinxing, {icon: myIcon}),
+    new BMap.Marker(huangcaoling, {icon: myIcon}),
+    new BMap.Marker(anzhou, {icon: myIcon}),
+    new BMap.Marker(dandong, {icon: myIcon}),
+    new BMap.Marker(manpu, {icon: myIcon}),
+    new BMap.Marker(chushan, {icon: myIcon}),
+    new BMap.Marker(ruchaodian, {icon: myIcon}),
+    new BMap.Marker(jiangjie, {icon: myIcon}),
+    new BMap.Marker(yinshan, {icon: myIcon})
+
+];
+
 for (var i = 0; i < marker.length; i++) {
     map.addOverlay(marker[i]);
 }//将点添加到地图中
-var curve = new BMapLib.CurveLine(points, {strokeColor:"black", strokeWeight:3, strokeOpacity:0.5}); //创建弧线对象
+
+var curve = new BMapLib.CurveLine([dandong,xuanchaun], {
+    strokeColor:"black", 
+    strokeWeight:3, 
+    strokeOpacity:0.5
+}); //创建弧线对象
 map.addOverlay(curve); //将弧线添加到地图中
+
+// 创建标记对象并设置图标
+//var marker = new BMap.Marker(guicheng, { icon: icon });
+// 将标记添加到地图中
+//map.addOverlay(marker);
+
+
+
+var curve1 = new BMapLib.CurveLine([ruchaodian,guicheng], {
+    strokeColor:"black", 
+    strokeWeight:3, 
+    strokeOpacity:0.5
+}); //创建弧线对象
+map.addOverlay(curve1); //将弧线添加到地图中
+var curve2 = new BMapLib.CurveLine([fuzhanling,jiangjie,manpu,chushan,guchang], {
+    strokeColor:"black", 
+    strokeWeight:3, 
+    strokeOpacity:0.5
+}); //创建弧线对象
+map.addOverlay(curve2); //将弧线添加到地图中
+var curve3 = new BMapLib.CurveLine([], {
+    strokeColor:"black", 
+    strokeWeight:3, 
+    strokeOpacity:0.5
+}); //创建弧线对象
+map.addOverlay(curve3); //将弧线添加到地图中
+var curve4 = new BMapLib.CurveLine([], {
+    strokeColor:"black", 
+    strokeWeight:3, 
+    strokeOpacity:0.5
+}); //创建弧线对象
+map.addOverlay(curve4); //将弧线添加到地图中
+
+// 添加文本标注
+var label = new BMap.Label("50军", {
+  position: wushijun, // 标注位置
+  offset: new BMap.Size(0, -20) // 标注偏移量
+});
+map.addOverlay(label);   
+label.setStyle({                              // 设置label的样式
+    color: '',
+    fontSize: '20px',
+    border: '0px solid #FF0000',
+    backgroundColor: 'transparent'
+})
+
+
+
 
 var infoWindow = new Array(marker.length);
 // 定义html字符串
-var sContent1 = "<div style='width: 1000px; height: 800px;'>北京很好玩！</div>";
+
+var sContent1 = "<div style='width: 500px; height: 400px;'>50军</div>";
 infoWindow[0] = new BMap.InfoWindow(sContent1);
 // marker添加点击事件
 marker[0].addEventListener('click', function () {
-    map.centerAndZoom(beijingPosition, 10);
+    map.centerAndZoom(curve1, 10);
     this.openInfoWindow(infoWindow[0]);
 });
 
